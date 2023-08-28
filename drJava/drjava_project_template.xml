@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20140826-r5761">
+  <project autorefresh="false" main="TemplatePlayer" manifest="" root="" work="">
+    <createjar file="schoolname_firstname_lastname.jar" flags="8"/>
+    <source>
+      <file active="true" name="student/player/TemplatePlayer.java" package="student.player" timestamp="09-May-2017 16:05:40">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-1.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-2.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-3.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-4.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-5.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-6.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+      <file name="sampleBoards/Classic-Random.properties" package="" timestamp="09-May-2017 15:37:59">
+        <select from="1246" to="1246"/>
+        <scroll column="33" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed/>
+    <classpath>
+      <file absolute="false" name="../lib/battleship.jar"/>
+    </classpath>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>

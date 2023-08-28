@@ -1,0 +1,289 @@
+<!-- begin_generated_IBM_copyright_prolog -->
+<!-- -->
+<!-- This is an automatically generated copyright prolog. -->
+<!-- After initializing, DO NOT MODIFY OR MOVE -->
+<!-- **************************************************************** -->
+<!-- Licensed Materials - Property of IBM -->
+<!-- 5724-Y95 -->
+<!-- (C) Copyright IBM Corp. 2017, 2018 All Rights Reserved. -->
+<!-- US Government Users Restricted Rights - Use, duplication or -->
+<!-- disclosure restricted by GSA ADP Schedule Contract with -->
+<!-- IBM Corp. -->
+<!-- -->
+<!-- end_generated_IBM_copyright_prolog -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+
+  <organization>
+    <name>VIE APCompSci community team</name>
+    <url>https://github.com/Rochester-VIE-APCompSci</url>
+  </organization>
+
+  <groupId>com.ibm.rochester.vie</groupId>
+  <artifactId>battleship</artifactId>
+  <version>1.1</version>
+  <packaging>jar</packaging>
+
+  <name>Rochester ViE Battleship Programming Competition</name>
+
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
+
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <current.year>2023</current.year>
+    <!-- Assumes LibreOffice is in the PATH. Override to specify a fully qualified exe. -->
+    <exe.soffice>soffice</exe.soffice>
+  </properties>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <!-- Blackjack.jar configurations -->
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <excludes>
+            <exclude>student/**</exclude>
+          </excludes>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+              <mainClass>my.battleship.PlatformImpl</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Sealed>true</Sealed>
+              <Built-by>${user.name}</Built-by>
+              <Specification-Title>Rochester VIE Programming Competition</Specification-Title>
+              <Specification-Vendor>IBM Corporation: VIE programming team</Specification-Vendor>
+              <Implementation-Title>Battleship</Implementation-Title>
+              <Implementation-Version>${project.version}</Implementation-Version>
+              <Implementation-Vendor>IBM Corporation: VIE programming team</Implementation-Vendor>
+            </manifestEntries>
+          </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>copy-lib</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <includeScope>runtime</includeScope>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- https://www.mojohaus.org/exec-maven-plugin/index.html -->
+      <!--<plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>gen-proj-pdf</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${exe.soffice}</executable>
+              <commandlineArgs>\-\-invisible \-\-nologo \-\-convert-to pdf \-\-outdir ${project.build.directory}/doc doc/ProjectOverview.doc</commandlineArgs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>gen-eclipse-pdf</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${exe.soffice}</executable>
+              <commandlineArgs>\-\-invisible \-\-nologo \-\-convert-to pdf \-\-outdir ${project.build.directory}/doc doc/EclipseSetupBlackjack.odt</commandlineArgs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>gen-guide-pdf</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${exe.soffice}</executable>
+              <commandlineArgs>\-\-invisible \-\-nologo \-\-convert-to pdf \-\-outdir ${project.build.directory}/doc doc/BlackjackProjectGuide.odt</commandlineArgs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>-->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>prep-template-player</id>
+            <phase>package</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>${project.basedir}/bin/prepare-player.sh</executable>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>javadoc</goal>
+            </goals>
+            <configuration>
+              <doclint>none</doclint>
+              <!--  <reportOutputDirectory>${project.basedir}</reportOutputDirectory> -->
+              <doctitle>${project.name}</doctitle>
+              <show>public</show>
+              <author>false</author>
+              <source>1.8</source>
+              <docfilessubdirs>true</docfilessubdirs>
+              <sourceFileIncludes>
+                <include>student/player/**/*.java</include>
+                <include>my/battleship/**/Platform.java</include>
+                <include>my/battleship/**/Player.java</include>
+                <include>my/battleship/**/Ship.java</include>
+                <include>my/battleship/**/ShotReply.java</include>
+                <include>my/battleship/**/ShotStatus.java</include>
+              </sourceFileIncludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Validate build, e.g. soffice fails silently. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <id>enforce-files-exist</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <skip>true</skip>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.0</version>
+                </requireMavenVersion>
+                <requireFilesExist>
+                  <files>
+                    <file>${project.build.directory}/doc/ProjectOverview.pdf</file>
+                    <file>${project.build.directory}/doc/BlackjackProjectGuide.pdf</file>
+                    <file>${project.build.directory}/doc/EclipseSetupBlackjack.pdf</file>
+                  </files>
+                </requireFilesExist>
+              </rules>
+              <fail>true</fail>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Plugin for creating the student zip -->
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.5.0</version>
+        <executions>
+          <execution>
+            <id>assemble-student-zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>student-v${project.version}</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/assembly/student-deliverable.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+          <execution>
+            <id>assemble-student-vscode-zip</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <finalName>student-vscode-v${project.version}</finalName>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>src/assembly/student-deliverable-vscode.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+
+      <!-- Plugins for Junit testing -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.8</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <dependencies>
+    <!-- Test dependencies -->
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>

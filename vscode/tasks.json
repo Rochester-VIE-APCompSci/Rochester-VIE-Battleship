@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "java (buildArtifact)",
+			"label": "Create student submission jar",
+			"mainClass": "student.player.TemplatePlayer",
+			"targetPath": "${workspaceFolder}/${workspaceFolderBasename}.jar",
+			"elements": [
+				"${compileOutput}",
+				"${workspaceFolder}/src"
+			],
+			"problemMatcher": []
+		}
+	]
+}
